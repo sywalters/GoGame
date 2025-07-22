@@ -77,7 +77,7 @@
 
 .error button {
   padding: 10px 20px;
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: white;
   border: none;
   border-radius: 4px;
@@ -86,7 +86,7 @@
 }
 
 .error button:hover {
-  background-color: #1976D2;
+  background-color: #1976d2;
 }
 
 .game-container {
@@ -108,11 +108,11 @@
   .app {
     padding: 10px;
   }
-  
+
   .app-header h1 {
     font-size: 2em;
   }
-  
+
   .game-container {
     gap: 20px;
   }

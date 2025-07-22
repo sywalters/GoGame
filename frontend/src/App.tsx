@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import GameBoard from './components/GameBoard';
-import GameControls from './components/GameControls';
-import { GameApi } from './api';
-import { GameState, Player } from './types';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import GameBoard from "./components/GameBoard";
+import GameControls from "./components/GameControls";
+import { GameApi } from "./api";
+import { GameState, Player } from "./types";
+import "./App.css";
 
 const App: React.FC = () => {
   const [gameState, setGameState] = useState<GameState | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [aiOpponentEnabled, setAiOpponentEnabled] = useState<boolean>(false);
-  const [aiDifficulty, setAiDifficulty] = useState<string>('medium');
+  const [aiDifficulty, setAiDifficulty] = useState<string>("medium");
   const [boardSize, setBoardSize] = useState<number>(19);
   const [aiPassNotification, setAiPassNotification] = useState<boolean>(false);
 
@@ -25,8 +25,8 @@ const App: React.FC = () => {
       const state = await GameApi.getGameState();
       setGameState(state);
     } catch (err) {
-      setError('Failed to load game state');
-      console.error('Error loading game state:', err);
+      setError("Failed to load game state");
+      console.error("Error loading game state:", err);
     } finally {
       setLoading(false);
     }
@@ -42,16 +42,18 @@ const App: React.FC = () => {
       setGameState(response.game_state);
 
       // Auto-play AI move after a short delay if enabled and game hasn't ended
-      if (aiOpponentEnabled && 
-          response.game_state.current_player === Player.WHITE && 
-          !response.game_state.game_ended) {
+      if (
+        aiOpponentEnabled &&
+        response.game_state.current_player === Player.WHITE &&
+        !response.game_state.game_ended
+      ) {
         setTimeout(() => {
           handleAiMove(aiDifficulty);
         }, 1000); // 1 second delay
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to make move');
-      console.error('Error making move:', err);
+      setError(err instanceof Error ? err.message : "Failed to make move");
+      console.error("Error making move:", err);
     }
   };
 
@@ -67,8 +69,8 @@ const App: React.FC = () => {
         }, 3000);
       }
     } catch (err) {
-      setError('Failed to make AI move');
-      console.error('Error making AI move:', err);
+      setError("Failed to make AI move");
+      console.error("Error making AI move:", err);
     }
   };
 
@@ -78,8 +80,8 @@ const App: React.FC = () => {
       const response = await GameApi.pass();
       setGameState(response.game_state);
     } catch (err) {
-      setError('Failed to pass turn');
-      console.error('Error passing turn:', err);
+      setError("Failed to pass turn");
+      console.error("Error passing turn:", err);
     }
   };
 
@@ -92,8 +94,8 @@ const App: React.FC = () => {
       setGameState(response.game_state);
       setBoardSize(size);
     } catch (err) {
-      setError('Failed to start new game');
-      console.error('Error starting new game:', err);
+      setError("Failed to start new game");
+      console.error("Error starting new game:", err);
     }
   };
 
@@ -104,8 +106,8 @@ const App: React.FC = () => {
       const response = await GameApi.resetGame();
       setGameState(response.game_state);
     } catch (err) {
-      setError('Failed to reset game');
-      console.error('Error resetting game:', err);
+      setError("Failed to reset game");
+      console.error("Error resetting game:", err);
     }
   };
 
@@ -131,7 +133,7 @@ const App: React.FC = () => {
     return (
       <div className="app">
         <div className="error">
-          {error || 'Failed to load game'}
+          {error || "Failed to load game"}
           <button onClick={loadGameState}>Retry</button>
         </div>
       </div>
@@ -148,7 +150,7 @@ const App: React.FC = () => {
           </div>
         )}
       </div>
-      
+
       <div className="game-container">
         <GameControls
           currentPlayer={gameState.current_player}

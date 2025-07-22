@@ -28,7 +28,7 @@
 }
 
 .board-cell:before {
-  content: '';
+  content: "";
   position: absolute;
   background-color: #000;
   z-index: 1;
@@ -47,7 +47,7 @@
 
 /* Vertical lines */
 .board-cell:after {
-  content: '';
+  content: "";
   position: absolute;
   background-color: #000;
   width: 1px;
@@ -81,7 +81,7 @@
 
 /* Star points */
 .board-cell.star-point:before {
-  content: '';
+  content: "";
   position: absolute;
   width: 6px;
   height: 6px;

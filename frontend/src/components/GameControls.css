@@ -96,12 +96,12 @@
 }
 
 .ai-move-button {
-  background-color: #673AB7;
+  background-color: #673ab7;
   color: white;
 }
 
 .ai-move-button:hover {
-  background-color: #5E35B1;
+  background-color: #5e35b1;
 }
 
 .ai-status {
@@ -139,7 +139,7 @@
 }
 
 .pass-button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
@@ -157,10 +157,10 @@
 }
 
 .new-game-button {
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: white;
 }
 
 .new-game-button:hover {
-  background-color: #1976D2;
+  background-color: #1976d2;
 }

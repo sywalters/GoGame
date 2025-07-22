@@ -1,6 +1,6 @@
-import React from 'react';
-import { Player } from '../types';
-import './GameControls.css';
+import React from "react";
+import { Player } from "../types";
+import "./GameControls.css";
 
 interface GameControlsProps {
   currentPlayer: Player;
@@ -39,7 +39,7 @@ const GameControls: React.FC<GameControlsProps> = ({
   consecutivePasses = 0,
 }) => {
   const getCurrentPlayerName = () => {
-    return currentPlayer === Player.BLACK ? 'Black' : 'White';
+    return currentPlayer === Player.BLACK ? "Black" : "White";
   };
 
   return (
@@ -54,12 +54,17 @@ const GameControls: React.FC<GameControlsProps> = ({
         ) : (
           <div className="current-player">
             <span>Current Player: </span>
-            <span className={`player-indicator ${currentPlayer === Player.BLACK ? 'black' : 'white'}`}>
+            <span
+              className={`player-indicator ${
+                currentPlayer === Player.BLACK ? "black" : "white"
+              }`}
+            >
               {getCurrentPlayerName()}
             </span>
             {consecutivePasses > 0 && (
               <small className="pass-indicator">
-                ({consecutivePasses} consecutive pass{consecutivePasses > 1 ? 'es' : ''})
+                ({consecutivePasses} consecutive pass
+                {consecutivePasses > 1 ? "es" : ""})
               </small>
             )}
           </div>
@@ -84,21 +89,21 @@ const GameControls: React.FC<GameControlsProps> = ({
         <h3>AI Opponent</h3>
         <div className="ai-toggle">
           <label>
-            <input 
-              type="checkbox" 
-              checked={aiOpponentEnabled} 
+            <input
+              type="checkbox"
+              checked={aiOpponentEnabled}
               onChange={onToggleAi}
             />
             Enable AI Opponent (plays as White)
           </label>
         </div>
-        
+
         {aiOpponentEnabled && (
           <div className="ai-settings">
             <div className="difficulty-selector">
               <label>Difficulty:</label>
-              <select 
-                value={aiDifficulty} 
+              <select
+                value={aiDifficulty}
                 onChange={(e) => onSetAiDifficulty?.(e.target.value)}
               >
                 <option value="easy">Easy</option>
@@ -106,7 +111,7 @@ const GameControls: React.FC<GameControlsProps> = ({
                 <option value="hard">Hard</option>
               </select>
             </div>
-            
+
             {currentPlayer === Player.WHITE && (
               <div className="ai-status">
                 <span>🤖 AI is thinking...</span>
@@ -120,8 +125,8 @@ const GameControls: React.FC<GameControlsProps> = ({
         <h3>Game Settings</h3>
         <div className="board-size-selector">
           <label>Board Size:</label>
-          <select 
-            value={boardSize} 
+          <select
+            value={boardSize}
             onChange={(e) => onSetBoardSize?.(parseInt(e.target.value))}
           >
             <option value={9}>9×9 (Small)</option>
@@ -130,7 +135,9 @@ const GameControls: React.FC<GameControlsProps> = ({
           </select>
         </div>
         <div className="size-info">
-          <small>Current board: {boardSize}×{boardSize}</small>
+          <small>
+            Current board: {boardSize}×{boardSize}
+          </small>
         </div>
       </div>
 
@@ -141,8 +148,8 @@ const GameControls: React.FC<GameControlsProps> = ({
         <button className="game-button reset-button" onClick={onReset}>
           Reset Game
         </button>
-        <button 
-          className="game-button new-game-button" 
+        <button
+          className="game-button new-game-button"
           onClick={() => onNewGame(boardSize)}
         >
           New Game ({boardSize}×{boardSize})
