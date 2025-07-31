@@ -1,0 +1,26 @@
+<div class="game-board-container">
+  <div 
+    class="game-board" 
+    [style.width.px]="boardWidth"
+    [style.height.px]="boardWidth"
+    [style.grid-template-columns]="'repeat(' + boardSize + ', ' + cellSize + 'px)'"
+    [style.grid-template-rows]="'repeat(' + boardSize + ', ' + cellSize + 'px)'">
+    
+    <ng-container *ngFor="let row of board; let rowIndex = index">
+      <div 
+        *ngFor="let cell of row; let colIndex = index"
+        [class]="getCellClass(rowIndex, colIndex)"
+        (click)="handleCellClick(rowIndex, colIndex)"
+        [style.width.px]="cellSize"
+        [style.height.px]="cellSize">
+        
+        <div 
+          *ngIf="cell !== Player.EMPTY"
+          [class]="getStoneClass(cell)"
+          [style.width.px]="cellSize * 0.8"
+          [style.height.px]="cellSize * 0.8">
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

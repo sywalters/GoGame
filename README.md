@@ -1,6 +1,6 @@
 # Go Game Web Application
 
-A web-based implementation of the ancient board game Go (Weiqi/Baduk) with a TypeScript React frontend and Python FastAPI backend.
+A web-based implementation of the ancient board game Go (Weiqi/Baduk) with both React and Angular frontends and a Python FastAPI backend.
 
 ## Features
 
@@ -39,7 +39,9 @@ A web-based implementation of the ancient board game Go (Weiqi/Baduk) with a Typ
   - Visual feedback for game state
   - Responsive design
 - **Modern Tech Stack**:
-  - TypeScript React frontend
+  - **Dual Frontend Options**: Choose between React or Angular
+  - TypeScript React frontend (frontend_react)
+  - Angular 20 frontend (frontend_angular)
   - Python FastAPI backend
   - REST API communication
   - Asynchronous AI processing
@@ -52,7 +54,7 @@ GoGame/
 │   ├── main.py              # FastAPI server
 │   ├── go_game.py           # Go game logic
 │   └── requirements.txt     # Python dependencies
-├── frontend/
+├── frontend_react/          # React TypeScript frontend
 │   ├── src/
 │   │   ├── components/      # React components
 │   │   ├── App.tsx          # Main application
@@ -60,8 +62,16 @@ GoGame/
 │   │   └── types.ts         # TypeScript types
 │   ├── package.json         # Node dependencies
 │   └── tsconfig.json        # TypeScript config
+├── frontend_angular/        # Angular 20 frontend
+│   ├── src/app/
+│   │   ├── game-board/      # Board component
+│   │   ├── game-controls/   # Controls component
+│   │   ├── game-api.service.ts # HTTP service
+│   │   ├── types.ts         # TypeScript types
+│   │   └── app.ts           # Main app component
+│   └── package.json         # Node dependencies
 ├── start_backend.sh         # Backend startup script
-├── start_frontend.sh        # Frontend startup script
+├── start_frontend.sh        # React frontend startup script
 └── README.md               # This file
 ```
 
@@ -92,19 +102,39 @@ This will:
 
 ### Frontend Setup
 
+#### Interactive Frontend Launcher (Recommended)
+
 1. Make the frontend script executable:
 ```bash
 chmod +x start_frontend.sh
 ```
 
-2. Start the frontend development server:
+2. Run the interactive frontend launcher:
 ```bash
 ./start_frontend.sh
 ```
 
-This will:
-- Install Node.js dependencies
-- Start the React development server on http://localhost:3000
+The script will prompt you to choose between:
+- **Option 1**: React (TypeScript) on http://localhost:3000
+- **Option 2**: Angular 20 on http://localhost:4200
+
+#### Manual Frontend Setup
+
+Alternatively, you can start each frontend manually:
+
+**React Frontend:**
+```bash
+cd frontend_react
+npm install
+npm start
+```
+
+**Angular Frontend:**
+```bash
+cd frontend_angular
+npm install
+npm start
+```
 
 ### Manual Setup
 
@@ -119,22 +149,33 @@ pip install -r requirements.txt
 python main.py
 ```
 
-**Frontend:**
+**React Frontend:**
 ```bash
-cd frontend
+cd frontend_react
+npm install
+npm start
+```
+
+**Angular Frontend:**
+```bash
+cd frontend_angular
 npm install
 npm start
 ```
 
 ## Usage
 
-1. Start both the backend and frontend servers
-2. Open your browser to http://localhost:3000
+1. Start the backend server
+2. Start your preferred frontend server:
+   - React: http://localhost:3000
+   - Angular: http://localhost:4200
 3. Click on empty intersections to place stones
 4. Use the control panel to:
    - Pass your turn
    - Reset the current game
-   - Start a new game
+   - Start a new game  
+   - Toggle AI opponent and adjust difficulty
+   - Change board size
 5. The game tracks captured stones and enforces all Go rules
 
 ## API Endpoints
@@ -167,11 +208,17 @@ The backend uses:
 
 ### Frontend Development
 
-The frontend uses:
-- React with TypeScript
+**React Frontend** (`frontend_react`):
+- React 18 with TypeScript
 - CSS Grid for board layout
 - Fetch API for backend communication
-- Component-based architecture
+- Component-based architecture with hooks
+
+**Angular Frontend** (`frontend_angular`):
+- Angular 20 with TypeScript
+- CSS Grid for board layout
+- HttpClient with RxJS observables
+- Component-based architecture with services and dependency injection
 
 ## Contributing
 

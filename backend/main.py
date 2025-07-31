@@ -12,7 +12,12 @@ app = FastAPI(title="Go Game API", version="1.0.0")
 # Enable CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=[
+        "http://localhost:3000",  # React frontend
+        "http://127.0.0.1:3000", 
+        "http://localhost:4200",  # Angular frontend
+        "http://127.0.0.1:4200"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

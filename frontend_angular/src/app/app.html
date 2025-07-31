@@ -1,0 +1,40 @@
+<div class="app">
+  <div class="app-header">
+    <h1>Go Game</h1>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+    <div *ngIf="aiPassNotification" class="ai-pass-notification">
+      🤖 AI Opponent passed their turn
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading game...</div>
+  
+  <div *ngIf="!loading && !gameState" class="error">
+    <div>{{ error || 'Failed to load game' }}</div>
+    <button (click)="loadGameState()">Retry</button>
+  </div>
+
+  <div *ngIf="!loading && gameState" class="game-container">
+    <app-game-controls
+      [currentPlayer]="gameState?.current_player || Player.BLACK"
+      [capturedStones]="gameState?.captured_stones || {black: 0, white: 0}"
+      (pass)="handlePass()"
+      (newGame)="handleNewGame($event)"
+      (reset)="handleReset()"
+      [aiOpponentEnabled]="aiOpponentEnabled"
+      (toggleAi)="toggleAiOpponent()"
+      [aiDifficulty]="aiDifficulty"
+      (setAiDifficulty)="setAiDifficulty($event)"
+      [boardSize]="boardSize"
+      (setBoardSize)="handleBoardSizeChange($event)"
+      [gameEnded]="gameState?.game_ended || false"
+      [consecutivePasses]="gameState?.consecutive_passes || 0"
+    ></app-game-controls>
+
+    <app-game-board
+      [board]="gameState?.board || []"
+      (move)="handleMove($event)"
+      [currentPlayer]="gameState?.current_player || Player.BLACK"
+    ></app-game-board>
+  </div>
+</div>
