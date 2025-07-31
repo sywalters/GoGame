@@ -8,8 +8,9 @@ echo
 echo "Please choose which frontend to start:"
 echo "1) React (TypeScript) - http://localhost:3000"
 echo "2) Angular 20 - http://localhost:4200"
+echo "3) Next.js 15 - http://localhost:3000"
 echo
-read -p "Enter your choice (1 or 2): " choice
+read -p "Enter your choice (1, 2, or 3): " choice
 echo
 
 case $choice in
@@ -25,8 +26,14 @@ case $choice in
         FRONTEND_NAME="Angular"
         PORT="4200"
         ;;
+    3)
+        echo "Starting Next.js Frontend..."
+        FRONTEND_DIR="frontend_nextjs"
+        FRONTEND_NAME="Next.js"
+        PORT="3000"
+        ;;
     *)
-        echo "Invalid choice. Please run the script again and choose 1 or 2."
+        echo "Invalid choice. Please run the script again and choose 1, 2, or 3."
         exit 1
         ;;
 esac
@@ -51,4 +58,10 @@ fi
 echo "Starting $FRONTEND_NAME development server on http://localhost:$PORT..."
 echo "Press Ctrl+C to stop the server"
 echo
-npm start
+
+# Use appropriate start command based on frontend type
+if [ "$FRONTEND_NAME" = "Next.js" ]; then
+    npm run dev
+else
+    npm start
+fi

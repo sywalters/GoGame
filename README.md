@@ -1,6 +1,6 @@
 # Go Game Web Application
 
-A web-based implementation of the ancient board game Go (Weiqi/Baduk) with both React and Angular frontends and a Python FastAPI backend.
+A web-based implementation of the ancient board game Go (Weiqi/Baduk) with React, Angular, and Next.js frontends and a Python FastAPI backend.
 
 ## Features
 
@@ -39,9 +39,10 @@ A web-based implementation of the ancient board game Go (Weiqi/Baduk) with both 
   - Visual feedback for game state
   - Responsive design
 - **Modern Tech Stack**:
-  - **Dual Frontend Options**: Choose between React or Angular
+  - **Triple Frontend Options**: Choose between React, Angular, or Next.js
   - TypeScript React frontend (frontend_react)
   - Angular 20 frontend (frontend_angular)
+  - Next.js 15 frontend (frontend_nextjs)
   - Python FastAPI backend
   - REST API communication
   - Asynchronous AI processing
@@ -70,8 +71,16 @@ GoGame/
 │   │   ├── types.ts         # TypeScript types
 │   │   └── app.ts           # Main app component
 │   └── package.json         # Node dependencies
+├── frontend_nextjs/         # Next.js 15 frontend
+│   ├── src/
+│   │   ├── app/             # App router pages
+│   │   ├── components/      # React components
+│   │   ├── lib/api.ts       # API client
+│   │   └── types/           # TypeScript types
+│   ├── package.json         # Node dependencies
+│   └── next.config.ts       # Next.js config
 ├── start_backend.sh         # Backend startup script
-├── start_frontend.sh        # React frontend startup script
+├── start_frontend.sh        # Frontend launcher script
 └── README.md               # This file
 ```
 
@@ -117,6 +126,7 @@ chmod +x start_frontend.sh
 The script will prompt you to choose between:
 - **Option 1**: React (TypeScript) on http://localhost:3000
 - **Option 2**: Angular 20 on http://localhost:4200
+- **Option 3**: Next.js 15 on http://localhost:3000
 
 #### Manual Frontend Setup
 
@@ -134,6 +144,13 @@ npm start
 cd frontend_angular
 npm install
 npm start
+```
+
+**Next.js Frontend:**
+```bash
+cd frontend_nextjs
+npm install
+npm run dev
 ```
 
 ### Manual Setup
@@ -163,12 +180,20 @@ npm install
 npm start
 ```
 
+**Next.js Frontend:**
+```bash
+cd frontend_nextjs
+npm install
+npm run dev
+```
+
 ## Usage
 
 1. Start the backend server
 2. Start your preferred frontend server:
    - React: http://localhost:3000
    - Angular: http://localhost:4200
+   - Next.js: http://localhost:3000
 3. Click on empty intersections to place stones
 4. Use the control panel to:
    - Pass your turn
@@ -219,6 +244,14 @@ The backend uses:
 - CSS Grid for board layout
 - HttpClient with RxJS observables
 - Component-based architecture with services and dependency injection
+
+**Next.js Frontend** (`frontend_nextjs`):
+- Next.js 15 with React 19 and TypeScript
+- App Router for modern file-based routing
+- CSS Grid for board layout with Tailwind CSS support
+- Native Fetch API for backend communication
+- Server-side rendering capabilities
+- Turbopack support for faster development builds
 
 ## Contributing
 

@@ -1,0 +1,116 @@
+.game-board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.game-board {
+  display: grid;
+  background-color: #dcb35c;
+  border: 2px solid #8b4513;
+  position: relative;
+}
+
+.board-cell {
+  background-color: #dcb35c;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.board-cell:hover {
+  background-color: #d4a853;
+}
+
+.board-cell:before {
+  content: "";
+  position: absolute;
+  background-color: #000;
+  z-index: 1;
+}
+
+/* Horizontal lines */
+.board-cell:not(.left-edge):not(.right-edge):before,
+.board-cell.left-edge:before,
+.board-cell.right-edge:before {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+/* Vertical lines */
+.board-cell:after {
+  content: "";
+  position: absolute;
+  background-color: #000;
+  width: 1px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Edge adjustments */
+.board-cell.left-edge:before {
+  width: 50%;
+  left: 50%;
+}
+
+.board-cell.right-edge:before {
+  width: 50%;
+  left: 0;
+}
+
+.board-cell.top-edge:after {
+  height: 50%;
+  top: 50%;
+}
+
+.board-cell.bottom-edge:after {
+  height: 50%;
+  top: 0;
+}
+
+/* Star points */
+.board-cell.star-point:before {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #000;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.stone {
+  border-radius: 50%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+  position: relative;
+}
+
+.stone.black {
+  background: radial-gradient(circle at 30% 30%, #555, #000);
+  border: 1px solid #000;
+}
+
+.stone.white {
+  background: radial-gradient(circle at 30% 30%, #fff, #ddd);
+  border: 1px solid #ccc;
+}
+
+.stone:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
