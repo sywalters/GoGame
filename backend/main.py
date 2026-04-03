@@ -5,7 +5,7 @@ from typing import Optional
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from go_game import GoGame
-from ai_opponent import GoAI, Player
+from ai_opponent import GoAI
 
 app = FastAPI(title="Go Game API", version="1.0.0")
 
@@ -14,9 +14,9 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",  # React frontend
-        "http://127.0.0.1:3000", 
+        "http://127.0.0.1:3000",
         "http://localhost:4200",  # Angular frontend
-        "http://127.0.0.1:4200"
+        "http://127.0.0.1:4200",
     ],
     allow_credentials=True,
     allow_methods=["*"],

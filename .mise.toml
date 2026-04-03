@@ -1,22 +1,31 @@
 [tools]
 python = "3.12"
+node = "22"
 
 [tasks.install]
-description = "Install dependencies"
-run = "pip install -e ."
+description = "Install backend dependencies"
+run = "pip install -r backend/requirements.txt"
 
-[tasks.test]
-description = "Run tests"
-run = "python -m pytest"
+[tasks.dev-backend]
+description = "Start the FastAPI backend server"
+run = "python -m uvicorn backend.main:app --reload"
+
+[tasks.dev-frontend]
+description = "Start a frontend (pass framework name: react, nextjs, angular)"
+run = "bash start_frontend.sh"
 
 [tasks.lint]
-description = "Run linters (ruff + black check)"
-run = ["python -m ruff check .", "python -m black --check ."]
+description = "Run ruff linter on backend"
+run = "python -m ruff check backend/"
 
 [tasks.lint-fix]
 description = "Auto-fix linting issues"
-run = ["python -m ruff check . --fix", "python -m black ."]
+run = "python -m ruff check backend/ --fix"
 
-[tasks.ci]
-description = "Full CI pipeline: lint + test"
-depends = ["lint", "test"]
+[tasks.fmt]
+description = "Check formatting on backend"
+run = "python -m ruff format --check backend/"
+
+[tasks.fmt-fix]
+description = "Auto-format backend code"
+run = "python -m ruff format backend/"

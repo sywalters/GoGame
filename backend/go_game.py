@@ -179,7 +179,7 @@ class GoGame:
         # Check if game should end (both players passed consecutively)
         if self.consecutive_passes >= 2:
             self.game_ended = True
-            print(f"Game ended: Both players passed consecutively")
+            print("Game ended: Both players passed consecutively")
 
         self.current_player = (
             Player.WHITE if self.current_player == Player.BLACK else Player.BLACK

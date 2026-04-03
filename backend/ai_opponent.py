@@ -1,4 +1,4 @@
-from typing import List, Tuple, Optional, Set
+from typing import List, Tuple, Optional
 import random
 import copy
 from go_game import GoGame, Player
@@ -158,9 +158,6 @@ class GoAI:
         row, col = move
         score = 0.0
 
-        # Check how many opponent stones this move captures
-        original_captured = temp_game.captured_stones[self.player]
-
         # Look for immediate captures
         for neighbor_row, neighbor_col in temp_game.get_neighbors(row, col):
             if temp_game.board[neighbor_row][neighbor_col] == self.opponent:
@@ -212,7 +209,6 @@ class GoAI:
                     and 0 <= new_col < temp_game.board_size
                     and temp_game.board[new_row][new_col] == Player.EMPTY
                 ):
-
                     distance = abs(dr) + abs(dc)
                     if distance <= influence_radius:
                         score += 1.0 / (distance + 1)
@@ -277,7 +273,9 @@ class GoAI:
 
         return top_moves
 
-    def _add_randomness(self, moves: List[Tuple[int, int]]) -> Optional[Tuple[int, int]]:
+    def _add_randomness(
+        self, moves: List[Tuple[int, int]]
+    ) -> Optional[Tuple[int, int]]:
         """Add randomness based on difficulty level"""
         if not moves:
             return None
