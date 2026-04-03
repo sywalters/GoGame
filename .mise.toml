@@ -1,0 +1,22 @@
+[tools]
+python = "3.12"
+
+[tasks.install]
+description = "Install dependencies"
+run = "pip install -e ."
+
+[tasks.test]
+description = "Run tests"
+run = "python -m pytest"
+
+[tasks.lint]
+description = "Run linters (ruff + black check)"
+run = ["python -m ruff check .", "python -m black --check ."]
+
+[tasks.lint-fix]
+description = "Auto-fix linting issues"
+run = ["python -m ruff check . --fix", "python -m black ."]
+
+[tasks.ci]
+description = "Full CI pipeline: lint + test"
+depends = ["lint", "test"]

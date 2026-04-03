@@ -80,3 +80,4 @@ jspm_packages/
 
 # dotenv environment variables file
 .env
+.claude/settings.local.json
