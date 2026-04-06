@@ -82,7 +82,7 @@ npm run dev:open
 
 ## Backend Requirement
 
-This frontend requires the Python FastAPI backend to be running on `http://localhost:8000`. Make sure to start the backend server before using the frontend.
+This frontend requires the Python FastAPI backend to be running on `http://localhost:8008`.
 
 ## Key Features of Next.js Implementation
 

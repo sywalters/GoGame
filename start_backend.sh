@@ -19,5 +19,5 @@ echo "Installing dependencies..."
 pip install -r requirements.txt
 
 # Start the server
-echo "Starting FastAPI server on http://localhost:8000..."
+echo "Starting FastAPI server on http://localhost:8008..."
 python main.py

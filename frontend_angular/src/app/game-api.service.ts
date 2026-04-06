@@ -8,7 +8,7 @@ import { GameState, MoveResponse, ApiResponse } from './types';
   providedIn: 'root'
 })
 export class GameApiService {
-  private readonly API_BASE_URL = 'http://localhost:8000';
+private readonly API_BASE_URL = 'http://localhost:8008';
 
   constructor(private http: HttpClient) {}
 

@@ -107,7 +107,7 @@ chmod +x start_backend.sh
 This will:
 - Create a Python virtual environment
 - Install required dependencies
-- Start the FastAPI server on http://localhost:8000
+- Start the FastAPI server on http://localhost:8008
 
 ### Frontend Setup
 
