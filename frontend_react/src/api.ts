@@ -1,6 +1,6 @@
 import { GameState, MoveResponse, ApiResponse } from "./types";
 
-const API_BASE_URL = "http://localhost:8008";
+const API_BASE_URL = process.env.REACT_APP_API_URL ?? "http://localhost:8008";
 
 export class GameApi {
   static async getGameState(): Promise<GameState> {

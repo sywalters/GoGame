@@ -9,8 +9,10 @@ echo "Please choose which frontend to start:"
 echo "1) React (TypeScript) - http://localhost:3000"
 echo "2) Angular 20 - http://localhost:4200"
 echo "3) Next.js 15 - http://localhost:3000"
+echo "4) Vue 3 - http://localhost:5173"
+echo "5) Flutter (Web) - http://localhost:8080"
 echo
-read -p "Enter your choice (1, 2, or 3): " choice
+read -p "Enter your choice (1-5): " choice
 echo
 
 case $choice in
@@ -32,8 +34,20 @@ case $choice in
         FRONTEND_NAME="Next.js"
         PORT="3000"
         ;;
+    4)
+        echo "Starting Vue Frontend..."
+        FRONTEND_DIR="frontend_vue"
+        FRONTEND_NAME="Vue"
+        PORT="5173"
+        ;;
+    5)
+        echo "Starting Flutter Web Frontend..."
+        FRONTEND_DIR="frontend_flutter"
+        FRONTEND_NAME="Flutter"
+        PORT="8080"
+        ;;
     *)
-        echo "Invalid choice. Please run the script again and choose 1, 2, or 3."
+        echo "Invalid choice. Please run the script again and choose 1-5."
         exit 1
         ;;
 esac
@@ -41,12 +55,23 @@ esac
 # Check if the chosen frontend directory exists
 if [ ! -d "$FRONTEND_DIR" ]; then
     echo "Error: $FRONTEND_DIR directory not found!"
-    echo "Please make sure both frontend directories exist."
+    echo "Please make sure the frontend directory exists."
     exit 1
 fi
 
 # Navigate to chosen frontend directory
 cd "$FRONTEND_DIR"
+
+# Handle Flutter separately
+if [ "$FRONTEND_NAME" = "Flutter" ]; then
+    echo "Getting Flutter dependencies..."
+    flutter pub get
+    echo "Starting Flutter web server on http://localhost:$PORT..."
+    echo "Press Ctrl+C to stop the server"
+    echo
+    flutter run -d web-server --web-port=$PORT
+    exit 0
+fi
 
 # Check if node_modules exists
 if [ ! -d "node_modules" ]; then

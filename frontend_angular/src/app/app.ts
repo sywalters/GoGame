@@ -26,6 +26,11 @@ export class App implements OnInit {
     this.loadGameState();
   }
 
+  sanitizeLogMessage(value: unknown): string {
+    const message = typeof value === 'string' ? value : String(value);
+    return message.replace(/[\r\n]+/g, ' ');
+  }
+
   loadGameState() {
     this.loading = true;
     this.error = null;
@@ -37,7 +42,7 @@ export class App implements OnInit {
       error: (err) => {
         this.error = 'Failed to load game state';
         this.loading = false;
-        console.error('Error loading game state:', err);
+        console.error('Error loading game state:', this.sanitizeLogMessage(err?.message ?? err));
       }
     });
   }
@@ -64,8 +69,8 @@ export class App implements OnInit {
         }
       },
       error: (err) => {
-        this.error = err.error?.detail || 'Failed to make move';
-        console.error('Error making move:', err);
+        this.error = err.error?.error || err.error?.detail || 'Failed to make move';
+        console.error('Error making move:', this.sanitizeLogMessage(err?.message ?? err));
       }
     });
   }
@@ -83,7 +88,7 @@ export class App implements OnInit {
       },
       error: (err) => {
         this.error = 'Failed to make AI move';
-        console.error('Error making AI move:', err);
+        console.error('Error making AI move:', this.sanitizeLogMessage(err?.message ?? err));
       }
     });
   }
@@ -96,7 +101,7 @@ export class App implements OnInit {
       },
       error: (err) => {
         this.error = 'Failed to pass turn';
-        console.error('Error passing turn:', err);
+        console.error('Error passing turn:', this.sanitizeLogMessage(err?.message ?? err));
       }
     });
   }
@@ -113,7 +118,7 @@ export class App implements OnInit {
       },
       error: (err) => {
         this.error = 'Failed to start new game';
-        console.error('Error starting new game:', err);
+        console.error('Error starting new game:', this.sanitizeLogMessage(err?.message ?? err));
       }
     });
   }
@@ -128,7 +133,7 @@ export class App implements OnInit {
       },
       error: (err) => {
         this.error = 'Failed to reset game';
-        console.error('Error resetting game:', err);
+        console.error('Error resetting game:', this.sanitizeLogMessage(err?.message ?? err));
       }
     });
   }

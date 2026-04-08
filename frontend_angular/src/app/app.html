@@ -16,8 +16,8 @@
 
   <div *ngIf="!loading && gameState" class="game-container">
     <app-game-controls
-      [currentPlayer]="gameState?.current_player || Player.BLACK"
-      [capturedStones]="gameState?.captured_stones || {black: 0, white: 0}"
+      [currentPlayer]="gameState.current_player || Player.BLACK"
+      [capturedStones]="gameState.captured_stones || {black: 0, white: 0}"
       (pass)="handlePass()"
       (newGame)="handleNewGame($event)"
       (reset)="handleReset()"
@@ -27,14 +27,14 @@
       (setAiDifficulty)="setAiDifficulty($event)"
       [boardSize]="boardSize"
       (setBoardSize)="handleBoardSizeChange($event)"
-      [gameEnded]="gameState?.game_ended || false"
-      [consecutivePasses]="gameState?.consecutive_passes || 0"
+      [gameEnded]="gameState.game_ended || false"
+      [consecutivePasses]="gameState.consecutive_passes || 0"
     ></app-game-controls>
 
     <app-game-board
-      [board]="gameState?.board || []"
+      [board]="gameState.board || []"
       (move)="handleMove($event)"
-      [currentPlayer]="gameState?.current_player || Player.BLACK"
+      [currentPlayer]="gameState.current_player || Player.BLACK"
     ></app-game-board>
   </div>
 </div>

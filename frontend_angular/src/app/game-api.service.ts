@@ -8,20 +8,20 @@ import { GameState, MoveResponse, ApiResponse } from './types';
   providedIn: 'root'
 })
 export class GameApiService {
-private readonly API_BASE_URL = 'http://localhost:8008';
+private readonly API_BASE_URL = (window as any).__env?.API_URL ?? 'http://localhost:8008';
 
   constructor(private http: HttpClient) {}
 
   getGameState(): Observable<GameState> {
     console.log('Attempting to fetch game state from:', `${this.API_BASE_URL}/game/state`);
     return this.http.get<GameState>(`${this.API_BASE_URL}/game/state`).pipe(
-      tap(response => console.log('Game state response:', response)),
+      tap(response => console.log('Game state response received')),
       catchError(this.handleError)
     );
   }
 
   private handleError = (error: HttpErrorResponse) => {
-    console.error('HTTP Error:', error);
+    console.error('HTTP Error status:', error.status);
     if (error.status === 0) {
       console.error('Network error - likely CORS or server not running');
     }
