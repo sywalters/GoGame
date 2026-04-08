@@ -70,14 +70,16 @@ class GoGame:
         """Capture opponent stones with no liberties and return count"""
         captured_count = 0
         to_remove = []
+        visited: Set[Tuple[int, int]] = set()
 
         for row in range(self.board_size):
             for col in range(self.board_size):
-                if self.board[row][col] == opponent:
+                if self.board[row][col] == opponent and (row, col) not in visited:
                     group = self.get_group(row, col)
+                    visited.update(group)
                     liberties = self.get_liberties(group)
 
-                    if len(liberties) == 0:
+                    if not liberties:
                         to_remove.extend(group)
                         captured_count += len(group)
 
@@ -98,7 +100,7 @@ class GoGame:
         group = temp_game.get_group(row, col)
         liberties = temp_game.get_liberties(group)
 
-        if len(liberties) > 0:
+        if liberties:
             return False
 
         # Check if move captures opponent stones
@@ -107,7 +109,7 @@ class GoGame:
             if temp_board[neighbor_row][neighbor_col] == opponent:
                 opponent_group = temp_game.get_group(neighbor_row, neighbor_col)
                 opponent_liberties = temp_game.get_liberties(opponent_group)
-                if len(opponent_liberties) == 0:
+                if not opponent_liberties:
                     return False  # Move captures opponent, so it's not suicide
 
         return True

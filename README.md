@@ -1,6 +1,6 @@
 # Go Game Web Application
 
-A web-based implementation of the ancient board game Go (Weiqi/Baduk) with React, Angular, and Next.js frontends and a Python FastAPI backend.
+A web-based implementation of the ancient board game Go (Weiqi/Baduk) with React, Angular, Next.js, Vue, and Flutter frontends and a Python FastAPI backend.
 
 ## Features
 
@@ -21,7 +21,7 @@ A web-based implementation of the ancient board game Go (Weiqi/Baduk) with React
   - Opening game patterns
   - Endgame detection and passing logic
   - Visual notifications when AI passes
-- **Interactive Web Interface**: 
+- **Interactive Web Interface**:
   - Dynamic board rendering for any size
   - Click-to-place stones
   - Real-time game state updates
@@ -39,21 +39,24 @@ A web-based implementation of the ancient board game Go (Weiqi/Baduk) with React
   - Visual feedback for game state
   - Responsive design
 - **Modern Tech Stack**:
-  - **Triple Frontend Options**: Choose between React, Angular, or Next.js
+  - **Five Frontend Options**: Choose between React, Angular, Next.js, Vue, or Flutter
   - TypeScript React frontend (frontend_react)
   - Angular 20 frontend (frontend_angular)
   - Next.js 15 frontend (frontend_nextjs)
+  - Vue 3 frontend (frontend_vue)
+  - Flutter web frontend (frontend_flutter)
   - Python FastAPI backend
   - REST API communication
   - Asynchronous AI processing
 
 ## Project Structure
 
-```
+```text
 GoGame/
 ├── backend/
 │   ├── main.py              # FastAPI server
 │   ├── go_game.py           # Go game logic
+│   ├── ai_opponent.py       # AI opponent logic
 │   └── requirements.txt     # Python dependencies
 ├── frontend_react/          # React TypeScript frontend
 │   ├── src/
@@ -79,6 +82,21 @@ GoGame/
 │   │   └── types/           # TypeScript types
 │   ├── package.json         # Node dependencies
 │   └── next.config.ts       # Next.js config
+├── frontend_vue/            # Vue 3 frontend
+│   ├── src/
+│   │   ├── components/      # Vue components
+│   │   ├── App.vue          # Root component
+│   │   ├── api.ts           # API client
+│   │   └── types.ts         # TypeScript types
+│   ├── package.json         # Node dependencies
+│   └── vite.config.ts       # Vite config
+├── frontend_flutter/        # Flutter web frontend
+│   ├── lib/
+│   │   ├── models/          # Data models
+│   │   ├── services/        # API service
+│   │   ├── widgets/         # UI widgets
+│   │   └── main.dart        # App entry point
+│   └── pubspec.yaml         # Dart dependencies
 ├── start_backend.sh         # Backend startup script
 ├── start_frontend.sh        # Frontend launcher script
 └── README.md               # This file
@@ -89,50 +107,60 @@ GoGame/
 - Python 3.8+
 - Node.js 16+
 - npm
+- Flutter SDK (for Flutter frontend only)
 
 ## Setup and Installation
 
 ### Backend Setup
 
 1. Make the backend script executable:
+
 ```bash
 chmod +x start_backend.sh
 ```
 
-2. Start the backend server:
+1. Start the backend server:
+
 ```bash
 ./start_backend.sh
 ```
 
 This will:
+
 - Create a Python virtual environment
 - Install required dependencies
-- Start the FastAPI server on http://localhost:8008
+- Start the FastAPI server on <http://localhost:8008>
 
 ### Frontend Setup
 
 #### Interactive Frontend Launcher (Recommended)
 
 1. Make the frontend script executable:
+
 ```bash
 chmod +x start_frontend.sh
 ```
 
-2. Run the interactive frontend launcher:
+1. Run the interactive frontend launcher:
+
 ```bash
 ./start_frontend.sh
 ```
 
 The script will prompt you to choose between:
-- **Option 1**: React (TypeScript) on http://localhost:3000
-- **Option 2**: Angular 20 on http://localhost:4200
-- **Option 3**: Next.js 15 on http://localhost:3000
+
+- **Option 1**: React (TypeScript) on <http://localhost:3000>
+- **Option 2**: Angular 20 on <http://localhost:4200>
+- **Option 3**: Next.js 15 on <http://localhost:3000>
+- **Option 4**: Vue 3 on <http://localhost:5173>
+- **Option 5**: Flutter (Web) on <http://localhost:8080>
 
 #### Manual Frontend Setup
 
 Alternatively, you can start each frontend manually:
 
 **React Frontend:**
+
 ```bash
 cd frontend_react
 npm install
@@ -140,6 +168,7 @@ npm start
 ```
 
 **Angular Frontend:**
+
 ```bash
 cd frontend_angular
 npm install
@@ -147,17 +176,31 @@ npm start
 ```
 
 **Next.js Frontend:**
+
 ```bash
 cd frontend_nextjs
 npm install
 npm run dev
 ```
 
-### Manual Setup
+**Vue Frontend:**
 
-If you prefer manual setup:
+```bash
+cd frontend_vue
+npm install
+npm run dev
+```
 
-**Backend:**
+**Flutter Frontend:**
+
+```bash
+cd frontend_flutter
+flutter pub get
+flutter run -d web-server --web-port=8080
+```
+
+### Manual Backend Setup
+
 ```bash
 cd backend
 python3 -m venv venv
@@ -166,39 +209,20 @@ pip install -r requirements.txt
 python main.py
 ```
 
-**React Frontend:**
-```bash
-cd frontend_react
-npm install
-npm start
-```
-
-**Angular Frontend:**
-```bash
-cd frontend_angular
-npm install
-npm start
-```
-
-**Next.js Frontend:**
-```bash
-cd frontend_nextjs
-npm install
-npm run dev
-```
-
 ## Usage
 
 1. Start the backend server
 2. Start your preferred frontend server:
-   - React: http://localhost:3000
-   - Angular: http://localhost:4200
-   - Next.js: http://localhost:3000
+   - React: <http://localhost:3000>
+   - Angular: <http://localhost:4200>
+   - Next.js: <http://localhost:3000>
+   - Vue: <http://localhost:5173>
+   - Flutter: <http://localhost:8080>
 3. Click on empty intersections to place stones
 4. Use the control panel to:
    - Pass your turn
    - Reset the current game
-   - Start a new game  
+   - Start a new game
    - Toggle AI opponent and adjust difficulty
    - Change board size
 5. The game tracks captured stones and enforces all Go rules
@@ -226,6 +250,7 @@ The backend provides the following REST API endpoints:
 ### Backend Development
 
 The backend uses:
+
 - FastAPI for the web framework
 - Pydantic for data validation
 - Python enums for game states
@@ -234,18 +259,21 @@ The backend uses:
 ### Frontend Development
 
 **React Frontend** (`frontend_react`):
+
 - React 18 with TypeScript
 - CSS Grid for board layout
 - Fetch API for backend communication
 - Component-based architecture with hooks
 
 **Angular Frontend** (`frontend_angular`):
+
 - Angular 20 with TypeScript
 - CSS Grid for board layout
 - HttpClient with RxJS observables
 - Component-based architecture with services and dependency injection
 
 **Next.js Frontend** (`frontend_nextjs`):
+
 - Next.js 15 with React 19 and TypeScript
 - App Router for modern file-based routing
 - CSS Grid for board layout with Tailwind CSS support

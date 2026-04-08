@@ -11,6 +11,7 @@ interface GameBoardProps {
 const GameBoard: React.FC<GameBoardProps> = ({
   board,
   onMove,
+  currentPlayer: _currentPlayer,
 }) => {
   const boardSize = board.length;
   const cellSize = Math.min(600 / boardSize, 30);

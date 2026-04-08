@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -7,16 +8,29 @@ from concurrent.futures import ThreadPoolExecutor
 from go_game import GoGame
 from ai_opponent import GoAI
 
-app = FastAPI(title="Go Game API", version="1.0.0")
+executor = ThreadPoolExecutor(max_workers=1)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    executor.shutdown(wait=False)
+
+
+app = FastAPI(title="Go Game API", version="1.0.0", lifespan=lifespan)
 
 # Enable CORS for frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",  # React frontend
+        "http://localhost:3000",  # React / Next.js frontend
         "http://127.0.0.1:3000",
         "http://localhost:4200",  # Angular frontend
         "http://127.0.0.1:4200",
+        "http://localhost:5173",  # Vue frontend
+        "http://127.0.0.1:5173",
+        "http://localhost:8080",  # Flutter web frontend
+        "http://127.0.0.1:8080",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -25,7 +39,6 @@ app.add_middleware(
 
 # Global game instance
 game = GoGame(19)
-executor = ThreadPoolExecutor(max_workers=1)
 
 
 def get_ai_move_sync(ai, game_state):
@@ -89,7 +102,7 @@ async def ai_move(request: AIMoveRequest):
     ai_passed = False
     try:
         # Run AI move calculation with timeout
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
         ai_move = await asyncio.wait_for(
             loop.run_in_executor(executor, get_ai_move_sync, ai, game),
             timeout=10.0,  # 10 second timeout

@@ -94,11 +94,10 @@ class GoAI:
         self, game: GoGame, valid_moves: List[Tuple[int, int]]
     ) -> List[Tuple[int, int]]:
         """Get corner and edge moves for opening play"""
-        corner_moves = []
         board_size = game.board_size
 
         # Corners and near-corner positions
-        corner_positions = [
+        corner_positions = {
             (3, 3),
             (3, board_size - 4),
             (board_size - 4, 3),
@@ -111,13 +110,9 @@ class GoAI:
             (board_size - 4, 2),
             (board_size - 3, board_size - 4),
             (board_size - 4, board_size - 3),
-        ]
+        }
 
-        for move in valid_moves:
-            if move in corner_positions:
-                corner_moves.append(move)
-
-        return corner_moves
+        return [move for move in valid_moves if move in corner_positions]
 
     def _evaluate_move(self, game: GoGame, move: Tuple[int, int]) -> float:
         """Evaluate a potential move and return a score"""
@@ -316,8 +311,8 @@ class GoAI:
                     try:
                         score = self._evaluate_move(game, move)
                         best_score = max(best_score, score)
-                    except Exception:
-                        # If evaluation fails, skip this move
+                    except Exception as e:
+                        print(f"Error evaluating move {move}: {e}")
                         continue
 
                 # Lower threshold for passing in endgame
